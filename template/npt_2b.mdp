@@ -1,0 +1,55 @@
+title                   = AMBER99SB-ILDN NPT Equilibration
+
+; Run parameters
+integrator              = md        ; Leap-frog integrator
+nsteps                  = 400000    ; 1 fs * 400000 = 400 ps
+dt                      = 0.001     ; 1 fs timestep (use 1 fs for 450K+)
+
+; Output control
+nstxout                 = 2000      ; Save coordinates every 2 ps
+nstvout                 = 2000      ; Save velocities every 2 ps
+nstenergy               = 2000      ; Save energies every 2 ps
+nstlog                  = 2000      ; Update log file every 2 ps
+
+; Bond parameters
+continuation            = yes       ; Restarting after NVT 
+constraint_algorithm    = lincs     ; Holonomic constraints 
+constraints             = h-bonds   ; Constrain bonds involving H
+lincs_iter              = 1         ; Number of iterations for accuracy
+lincs_order             = 4         ; Order of the expansion
+
+; Neighbor searching and Cutoffs
+cutoff-scheme           = Verlet    ; Buffered neighbor searching
+ns_type                 = grid      ; Search neighboring grid cells
+nstlist                 = 5         ; Update neighbor list every 10 steps
+rcoulomb                = 1.2       ; Short-range electrostatic cutoff (1.2 nm, matching production)
+rvdw                    = 1.2       ; Short-range van der Waals cutoff (1.2 nm, matching production)
+DispCorr                = EnerPres  ; Apply dispersion correction for cutoff vdW
+
+; Electrostatics
+coulombtype             = PME       ; Particle Mesh Ewald for long-range electrostatics
+pme_order               = 4         ; Cubic interpolation order
+fourierspacing          = 0.12      ; Grid spacing for FFT (optimized for 1.2 nm cutoff)
+
+; Temperature coupling
+tcoupl                  = V-rescale             ; Canonical ensemble thermostat
+tc-grps                 = Protein Non-Protein   ; Two separate coupling groups
+tau_t                   = 0.01     0.01         ; Time constant in ps
+ref_t                   = {ref_t}     {ref_t}           ; Target temperature (change for 370K, 450K, 550K)
+
+; Pressure coupling (ON for NPT)
+pcoupl                  = C-rescale             ; Pressure coupling on in NPT
+pcoupltype              = isotropic             ; Uniform scaling of box vectors
+tau_p                   = 0.5                   ; Time constant in ps
+ref_p                   = 1.0                   ; Reference pressure, in bar
+compressibility         = 4.5e-5                ; Isothermal compressibility of water, bar^-1
+
+; Reference coordinate scaling
+refcoord_scaling        = com                    ; Ensures correct scaling of restraints
+
+; Periodic boundary conditions
+pbc                     = xyz       ; 3-D periodic boundary conditions
+
+; Velocity generation
+gen_vel                 = no        ; Continue from NVT, do not reassign velocities
+

@@ -1,0 +1,20 @@
+; ions.mdp - Energy minimization after ion addition
+
+; Algorithm and stopping criteria
+integrator  = steep         ; Steepest descent minimization
+emtol       = 1000.0        ; Stop minimization when max force < 1000 kJ/mol/nm
+emstep      = 0.01          ; Minimization step size
+nsteps      = 50000         ; Maximum number of steps
+
+; Neighbor searching and cutoffs
+nstlist         = 5         ; Update neighbor list every 10 steps
+cutoff-scheme   = Verlet    ; Buffered neighbor searching
+ns_type         = grid      ; Grid-based neighbor search
+coulombtype     = cutoff       ; Particle Mesh Ewald for electrostatics cutoof / PME
+rcoulomb        = 1.2       ; Electrostatic cutoff (1.2 nm, matching production)
+rvdw            = 1.2       ; Van der Waals cutoff (1.2 nm, matching production)
+
+; Constraints and Periodic Boundary Conditions
+pbc             = xyz       ; Apply periodic boundary conditions in all directions
+constraints     = none      ; No constraints during energy minimization
+

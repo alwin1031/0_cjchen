@@ -55,6 +55,38 @@ if __name__ == '__main__':
     gen_command.run()
     gen_md = CommandGenerator(
         param_file="param.txt",
+        template_file="template/ions.mdp",
+        output_file="ions.mdp"
+    )
+    gen_md = CommandGenerator(
+        param_file="param.txt",
+        template_file="template/minim.mdp",
+        output_file="minim.mdp"
+    )
+    gen_md.run()
+    gen_md = CommandGenerator(
+        param_file="param.txt",
+        template_file="template/nvt_1b.mdp",
+        output_file="nvt_1b.mdp"
+    )
+    gen_md = CommandGenerator(
+        param_file="param.txt",
+        template_file="template/nvt_2b.mdp",
+        output_file="nvt_2b.mdp"
+    )
+    gen_md = CommandGenerator(
+        param_file="param.txt",
+        template_file="template/npt_1b.mdp",
+        output_file="npt_1b.mdp"
+    )
+    gen_md = CommandGenerator(
+        param_file="param.txt",
+        template_file="template/npt_2b.mdp",
+        output_file="npt_2b.mdp"
+    )
+    gen_md.run()
+    gen_md = CommandGenerator(
+        param_file="param.txt",
         template_file="template/md_b.mdp",
         output_file="md_b.mdp"
     )
