@@ -1,2 +1,2 @@
 protein_name=ec
-ref_t=450
+ref_t=400
