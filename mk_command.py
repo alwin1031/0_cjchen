@@ -1,3 +1,5 @@
+import os
+
 class CommandGenerator:
     def __init__(self, param_file, template_file, output_file):
         self.param_file = param_file
@@ -26,6 +28,7 @@ class CommandGenerator:
     def generate_command(self):
         """Substitutes parameters into the template and returns the generated command."""
         params = self.read_parameters()
+        params["pwd"] = os.getcwd()
         template = self.read_template()
         try:
             command = template.format(**params)
@@ -50,7 +53,7 @@ if __name__ == '__main__':
     gen_command = CommandGenerator(
         param_file="param.txt",
         template_file="template/command_template.txt",
-        output_file="command.txt"
+        output_file="commands.txt"
     )
     gen_command.run()
     gen_ions = CommandGenerator(

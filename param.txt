@@ -1,2 +1,2 @@
-protein_name=ec
+protein_name=ecpa
 ref_t=400
