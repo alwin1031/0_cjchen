@@ -63,6 +63,6 @@ python3 python/trans_dssp.py -f {protein_name}_dssp.dat -o {protein_name}_dssp.p
 echo "Protein" | gmx gyrate -s md_0_10.tpr -f md_0_10_fit.xtc -o {protein_name}_gyrate.xvg
 python3 python/trans_gyrate.py -f {protein_name}_gyrate.xvg -o {protein_name}_gyrate.png
 
-chimerax --cmd "open start.pdb; set bgColor white; save shot_1.jpg width 2000; turn; save shot_2.jpg width 2000; turn; save shot_3.jpg width 2000; turn; save shot_4.jpg width 2000; open {pwd}/md_0_10_fit.xtc structureModel #1;"
+chimerax --cmd "open start.pdb; set bgColor white; save shot_1.jpg width 2000; turn; save shot_2.jpg width 2000; turn; save shot_3.jpg width 2000; turn; save shot_4.jpg width 2000; open {pwd}/md_0_10_fit.xtc structureModel #1; coordset #1 5000; save shot_5000_1.jpg width 2000; turn; save shot_5000_2.jpg width 2000; turn; save shot_5000_3.jpg width 2000; turn; save shot_5000_4.jpg width 2000;"
 # pkill -9 chimerax
 # gmx dssp -f md_0_10_fit.xtc -s md_0_10.tpr -o {protein_name}_dssp.dat -b 1000 -e 5000
